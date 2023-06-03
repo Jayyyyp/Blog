@@ -77,7 +77,7 @@
         SET
             blog_title = #{blogTitle},
             blog_content = #{blogContent},
-            update_at = now()
+            updated_at = now()
         WHERE
             blog_id = #{blogId}
     </update>

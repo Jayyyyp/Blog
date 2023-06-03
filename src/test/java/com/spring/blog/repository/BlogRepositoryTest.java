@@ -106,18 +106,30 @@ public class BlogRepositoryTest {
         //         1. 2번글 원본 데이터를 얻어온 후, blogTitle, blogContent 내용만 수정하여 다시 update()
         //         2. Blog 객체를 생성하여 blogId와 blogTitle, blogContent 내용만 setter로 주입하여 update()
 
-        // 1번
+        // fixture
         long blogId = 2;
         String blogTitle = "수정한제목";
         String blogContent = "수정한본문";
 
-        Blog blog = blogRepository.findById(blogId);
-        blog.setBlogTitle(blogTitle);
-        blog.setBlogContent(blogContent);
+        // 1번
+//        Blog blog = blogRepository.findById(blogId);
+//        blog.setBlogTitle(blogTitle);
+//        blog.setBlogContent(blogContent);
+//        System.out.println(blog);
 
-        // when
+        // 2번
+        Blog blog = Blog.builder()
+                .blogTitle(blogTitle)
+                .blogContent(blogContent)
+                .blogId(blogId)
+                .build();
 
-        // then
+        // when : 수정내역 디비에 반영하기
+        blogRepository.update(blog);
+
+        // then : 바뀐 2번 글의 타이틀은 "수정한제목"으로, 본문은 "수정한본문"으로 변환되었을 것
+        assertEquals(blogTitle, blogRepository.findById(blogId).getBlogTitle());
+        assertEquals(blogContent, blogRepository.findById(blogId).getBlogContent());
     }
 
     @AfterEach // 각 단위테스트 끝난 후에 실행할 구문을 작성
