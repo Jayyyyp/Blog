@@ -23,4 +23,19 @@ public interface BlogRepository  {
     // Blog 엔터티 하나가 포스팅 row 하나를 받을 수 있고
     // n개의 복수의 Blog 엔터티를 받아  List로 감싸기
     List<Blog> findAll();
+
+    // 단일 행 조회기능 findById()
+    Blog findById(long blogId);
+
+    // 새 데이터 저장기능 save()
+    // 저장시, writer, blog_title, blog_content 3개 파라미터를 요구함
+    // 3개 파라미터는 Blog 엔터티의 멤버변수
+    void save(Blog blog);
+
+    // 데이터 삭제기능 deleteById()
+    void deleteById(long blogId);
+
+    // 데이터 수정기능
+    // JPA에서는 .save()를 동일하게 쓰지만 분리할 방법이 없어 메서드명을 다르게 사용
+    void update(Blog blog);
 }
