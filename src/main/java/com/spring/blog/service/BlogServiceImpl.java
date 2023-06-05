@@ -18,6 +18,6 @@ public class BlogServiceImpl implements BlogService{
     }
     @Override
     public List<Blog> findAll() {
-        return null;
+        return blogRepository.findAll();
     }
 }
